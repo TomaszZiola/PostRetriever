@@ -6,6 +6,7 @@ When a GET request is made to /post/export, the PostController delegates the req
 
 To build and run the application locally, use the following commands
 
+```bash
 ./gradlew build
 ./gradlew bootRun
 
