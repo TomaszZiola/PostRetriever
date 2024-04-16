@@ -9,5 +9,6 @@ To build and run the application locally, use the following commands
 ```bash
 ./gradlew build
 ./gradlew bootRun
+```
 
 Make a GET request to http://localhost:8080/post/export to download ZIP file
