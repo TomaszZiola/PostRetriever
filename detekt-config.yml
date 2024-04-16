@@ -1,0 +1,32 @@
+complexity:
+    LongMethod:
+        active: true
+        threshold: 60
+        excludes: [ '**/test/**' ]
+
+performance:
+    SpreadOperator:
+        active: true
+        excludes: [ '**/test/**', '**/*Application.kt' ]
+style:
+    MaxLineLength:
+        active: true
+        maxLineLength: 150
+        excludePackageStatements: true
+        excludeImportStatements: true
+        excludeCommentStatements: false
+        excludes: [ '**/test/**' ]
+
+    ReturnCount:
+        active: true
+        max: 10
+        excludedFunctions: 'equals'
+        excludeLabeled: false
+        excludeReturnFromLambda: true
+        excludeGuardClauses: false
+    ThrowsCount:
+        active: true
+        max: 10
+        excludeGuardClauses: false
+    UnnecessaryAbstractClass:
+        active: false
