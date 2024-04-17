@@ -1,7 +1,6 @@
 package com.ziola.postsreader.integrations
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
 import com.github.tomakehurst.wiremock.junit5.WireMockTest
 import com.ziola.postsreader.constants.Constants.ATTACHMENT_FILENAME
 import com.ziola.postsreader.dtos.PostDto
@@ -28,7 +27,7 @@ internal class IntegrationTest {
     var port: Int = 0
 
     @Autowired
-    lateinit var mapper: ObjectMapper
+    lateinit var objectMapper: ObjectMapper
 
     @Test
     fun `GET#should return ResponseEntity with zip body containing five posts`() {
@@ -55,7 +54,7 @@ internal class IntegrationTest {
             generateSequence { zipInput.nextEntry }
                 .map {
                     val entryContents = zipInput.readBytes().decodeToString()
-                    mapper.readValue(entryContents, PostDto::class.java)
+                    objectMapper.readValue(entryContents, PostDto::class.java)
                 }
                 .toList()
         }
