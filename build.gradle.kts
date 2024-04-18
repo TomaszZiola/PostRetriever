@@ -29,6 +29,7 @@ dependencies {
     testImplementation("io.quarkiverse.mockk:quarkus-junit5-mockk:2+")
     testImplementation("com.github.tomakehurst:wiremock-jre8-standalone:3.+")
     testImplementation("io.rest-assured:kotlin-extensions:5.+")
+    testImplementation("com.lectra:koson:1.+")
 }
 
 tasks.withType<KotlinCompile> {
