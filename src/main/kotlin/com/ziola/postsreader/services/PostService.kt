@@ -36,7 +36,7 @@ class PostService(
         zipOutputStream: ZipOutputStream,
     ) {
         logger.debug { "Writing Post to ZIP: $postDto" }
-        val postAsBytes = objectMapper.writeValueAsString(postDto).toByteArray()
+        val postAsBytes = objectMapper.writeValueAsString(postDto).encodeToByteArray()
         val fileName = "${postDto.id}.json"
         zipOutputStream.putNextEntry(ZipEntry(fileName))
         zipOutputStream.write(postAsBytes)

@@ -23,7 +23,7 @@ import java.util.zip.ZipInputStream
 
 @WireMockTest(httpPort = 8081)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-internal class IntegrationTest {
+internal class GetPostIt {
     @LocalServerPort
     var port: Int = 0
 
