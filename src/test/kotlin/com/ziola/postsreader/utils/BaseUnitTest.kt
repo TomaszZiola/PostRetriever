@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jsonMapper
 import com.ziola.postsreader.clients.PlaceholderClient
 import com.ziola.postsreader.controllers.PostController
-import com.ziola.postsreader.dtos.PostDto
+import com.ziola.postsreader.dtos.Post
 import com.ziola.postsreader.models.ByteArrayResourceModel
 import com.ziola.postsreader.models.PostDtoModel
 import com.ziola.postsreader.models.ResponseEntityModel
@@ -23,7 +23,7 @@ abstract class BaseUnitTest {
     var service = mockk<PostService>()
 
     protected lateinit var byteArrayResource: ByteArrayResource
-    protected lateinit var postDto: PostDto
+    protected lateinit var postDto: Post
     private lateinit var postDtoBytes: ByteArray
     private lateinit var postDtoString: String
     protected lateinit var responseEntity: ResponseEntity<ByteArrayResource>
@@ -44,6 +44,6 @@ abstract class BaseUnitTest {
 
         every { client.getPosts() } returns listOf(postDto)
         every { objectMapper.writeValueAsString(postDto) } returns postDtoString
-        every { service.retrievePosts() } returns ByteArrayResource(postDtoBytes)
+//        every { service.retrievePosts(numberOfPost) } returns ByteArrayResource(postDtoBytes)
     }
 }

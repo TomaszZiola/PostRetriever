@@ -15,7 +15,7 @@ class PostControllerTest : BaseUnitTest() {
         assertThat(result).isEqualTo(responseEntity)
 
         verifySequence {
-            service.retrievePosts()
+            service.retrievePosts(numberOfPost)
         }
     }
 }

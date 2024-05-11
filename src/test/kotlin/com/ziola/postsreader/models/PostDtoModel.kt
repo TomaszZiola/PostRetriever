@@ -1,13 +1,13 @@
 package com.ziola.postsreader.models
 
 import com.fasterxml.jackson.module.kotlin.jsonMapper
-import com.ziola.postsreader.dtos.PostDto
+import com.ziola.postsreader.dtos.Post
 
 internal object PostDtoModel {
     private val objectMapper = jsonMapper {}
 
-    fun basic(): PostDto {
-        return PostDto(
+    fun basic(): Post {
+        return Post(
             userId = 1,
             id = 1,
             title = "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",

@@ -9,7 +9,7 @@ internal class PostServiceTest : BaseUnitTest() {
     @Test
     fun `PostService#retrievePosts should return ByteArrayResource`() {
         // when
-        val result = serviceImpl.retrievePosts()
+        val result = serviceImpl.retrievePosts(numberOfPost)
 
         // then
         assertThat(result).isEqualTo(byteArrayResource)
