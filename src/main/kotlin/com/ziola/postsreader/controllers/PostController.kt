@@ -30,7 +30,7 @@ class PostController(
                     .header(CONTENT_DISPOSITION, ATTACHMENT_FILENAME)
                     .contentType(APPLICATION_OCTET_STREAM)
                     .body(it)
-                    .also { logger.debug { "GET Posts result" } }
             }
+            .also { logger.debug { "GET Posts result" } }
     }
 }

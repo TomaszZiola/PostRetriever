@@ -1,0 +1,3 @@
+include:
+    project: test-ci
+    file: -V1/pipelines/test.yml
