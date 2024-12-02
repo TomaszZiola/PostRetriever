@@ -7,14 +7,11 @@ import com.ziola.postsreader.dtos.Post
 import io.github.oshai.kotlinlogging.KotlinLogging
 import org.springframework.core.io.ByteArrayResource
 import org.springframework.stereotype.Service
-import reactor.core.publisher.Flux
+import reactor.core.publisher.Flux.fromIterable
 import reactor.core.publisher.Mono
 import java.io.ByteArrayOutputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 
 @Service
 class PostService(
@@ -25,7 +22,7 @@ class PostService(
 
     fun retrievePosts(numberOfPost: Int): Mono<ByteArrayResource> {
         return client.getPosts()
-            .flatMap { getComments(it) }
+            .flatMap { getComments(it, numberOfPost) }
             .map { groupComments(it) }
             .map { createStreams(it) }
     }
@@ -44,9 +41,12 @@ class PostService(
         return comments.groupBy { it.email.substringAfter("@") }
     }
 
-    private fun getComments(posts: List<Post>): Mono<List<Comment>> {
-        val monoList = posts.take(5).map { client.getComments(it.id) }
-        return Flux.fromIterable(monoList)
+    private fun getComments(
+        posts: List<Post>,
+        numberOfPost: Int,
+    ): Mono<List<Comment>> {
+        val monoList = posts.take(numberOfPost).map { client.getComments(it.id) }
+        return fromIterable(monoList)
             .flatMap { it }
             .flatMapIterable { it }
             .collectList()

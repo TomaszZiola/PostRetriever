@@ -20,7 +20,8 @@ style:
     ReturnCount:
         active: true
         max: 10
-        excludedFunctions: 'equals'
+        excludedFunctions:
+        -   equals
         excludeLabeled: false
         excludeReturnFromLambda: true
         excludeGuardClauses: false

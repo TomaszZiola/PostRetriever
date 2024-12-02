@@ -9,7 +9,7 @@ class PostControllerTest : BaseUnitTest() {
     @Test
     fun `PostController#getPosts should return ResponseEntity`() {
         // when
-        val result = controllerImpl.getPosts()
+        val result = controllerImpl.getPosts(numberOfPost)
 
         // then
         assertThat(result).isEqualTo(responseEntity)

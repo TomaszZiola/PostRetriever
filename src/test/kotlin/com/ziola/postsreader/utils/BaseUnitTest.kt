@@ -14,9 +14,12 @@ import io.mockk.mockk
 import org.junit.jupiter.api.BeforeEach
 import org.springframework.core.io.ByteArrayResource
 import org.springframework.http.ResponseEntity
+import reactor.core.publisher.Mono
 
 abstract class BaseUnitTest {
     private val objectMapperImpl = jsonMapper {}
+
+    val numberOfPost = 5
 
     var objectMapper = mockk<ObjectMapper>()
     var client = mockk<PlaceholderClient>()
@@ -44,6 +47,6 @@ abstract class BaseUnitTest {
 
         every { client.getPosts() } returns listOf(postDto)
         every { objectMapper.writeValueAsString(postDto) } returns postDtoString
-//        every { service.retrievePosts(numberOfPost) } returns ByteArrayResource(postDtoBytes)
+        every { service.retrievePosts(numberOfPost) } returns ByteArrayResource(postDtoBytes)
     }
 }
