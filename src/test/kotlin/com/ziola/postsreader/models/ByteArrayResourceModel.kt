@@ -10,12 +10,13 @@ object ByteArrayResourceModel {
     private val objectMapper = jsonMapper {}
 
     fun basic(): ByteArrayResource {
+        val emailDomain = CommentDtoModel.basic().email.substringAfter("@")
         ByteArrayOutputStream().use { byteArrayOutputStream ->
             ZipOutputStream(byteArrayOutputStream).use { zipOutputStream ->
-                val postAsBytes = objectMapper.writeValueAsString(PostDtoModel.basic()).toByteArray()
-                val fileName = "${PostDtoModel.basic().id}.json"
+                val commentsAsBytes = objectMapper.writeValueAsString(listOf(CommentDtoModel.basic())).toByteArray()
+                val fileName = "$emailDomain.json"
                 zipOutputStream.putNextEntry(ZipEntry(fileName))
-                zipOutputStream.write(postAsBytes)
+                zipOutputStream.write(commentsAsBytes)
                 zipOutputStream.closeEntry()
             }
             return ByteArrayResource(byteArrayOutputStream.toByteArray())

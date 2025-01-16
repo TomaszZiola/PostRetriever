@@ -45,8 +45,10 @@ class PostService(
         posts: List<Post>,
         numberOfPost: Int,
     ): Mono<List<Comment>> {
-        val monoList = posts.take(numberOfPost).map { client.getComments(it.id) }
-        return fromIterable(monoList)
+        return fromIterable(
+            posts.take(numberOfPost)
+                .map { client.getComments(it.id) },
+        )
             .flatMap { it }
             .flatMapIterable { it }
             .collectList()
@@ -58,10 +60,10 @@ class PostService(
         zipOutputStream: ZipOutputStream,
     ) {
         logger.debug { "Writing Post to ZIP: $domain" }
-        val postAsBytes = objectMapper.writeValueAsString(comments).encodeToByteArray()
+        val commentsAsBytesArray = objectMapper.writeValueAsString(comments).encodeToByteArray()
         val fileName = "$domain.json"
         zipOutputStream.putNextEntry(ZipEntry(fileName))
-        zipOutputStream.write(postAsBytes)
+        zipOutputStream.write(commentsAsBytesArray)
         zipOutputStream.closeEntry()
         logger.debug { "Wrote Post to ZIP" }
     }
