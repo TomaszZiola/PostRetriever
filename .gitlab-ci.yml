@@ -1,4 +1,4 @@
 include:
-    - project: test-ci
+    - project: applications/cicd
       file:
-          - V1/pipelines/test.yml
+          - pipelines/test.yml
